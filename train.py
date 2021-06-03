@@ -14,12 +14,12 @@ import cv2 as cv
 import numpy as np
 from pathlib import Path
 import tensorflow as tf
+
 # tf.compat.v1.disable_eager_execution()
 physical_devices = tf.config.list_physical_devices('GPU')
 tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
 
-save_dir = lib.get_save_dir("runs/train")
 
 model = Sequential([
     applications.EfficientNetB0(
@@ -41,6 +41,7 @@ model.compile(
     loss=losses.MSE,
     metrics=['acc', 'mse'])
 
+save_dir = lib.get_save_dir("runs/train")
 data_root = Path("/dataset/data01")
 label_path = data_root / "train_data01.csv"
 images_dir = data_root / "train_data01"
